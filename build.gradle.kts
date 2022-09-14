@@ -9,13 +9,14 @@ plugins {
     id("com.google.devtools.ksp").version("1.7.10-1.0.6").apply(false)
 }
 repositories {
-    google()
     gradlePluginPortal()
-    mavenLocal()
     mavenCentral()
-    maven("https://plugins.gradle.org/m2/")
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    mavenLocal()
+    google()
     maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://kotlin.bintray.com/kotlinx/")
+    maven("https://plugins.gradle.org/m2/")
     maven("https://jitpack.io")
 }
 tasks.register("clean", Delete::class) {

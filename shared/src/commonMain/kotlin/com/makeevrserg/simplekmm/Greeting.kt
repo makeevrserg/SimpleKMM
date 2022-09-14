@@ -1,6 +1,6 @@
 package com.makeevrserg.simplekmm
 
-import com.makeevrserg.simplekmm.domain.rick_and_morty.Builder
+import com.makeevrserg.simplekmm.domain.rick_and_morty.KtorfitBuilder
 import com.makeevrserg.simplekmm.domain.rick_and_morty.RickAndMortyAPI
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -21,7 +21,7 @@ class Greeting {
             })
         }
     }
-    val rickAndMortyAPI: RickAndMortyAPI = Builder.rickAndMortyAPI
+    val rickAndMortyAPI: RickAndMortyAPI = KtorfitBuilder(client).rickAndMortyAPI
     suspend fun getHtml(): String {
         val response = client.get("https://ktor.io/docs")
         return response.bodyAsText()

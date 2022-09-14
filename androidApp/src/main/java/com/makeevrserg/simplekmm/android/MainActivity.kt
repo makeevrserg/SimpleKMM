@@ -1,5 +1,6 @@
 package com.makeevrserg.simplekmm.android
 
+import CharacterScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,12 +8,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -22,75 +21,47 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.makeevrserg.simplekmm.Greeting
+import com.makeevrserg.simplekmm.ui.CharacterListViewModel
+import com.seiko.imageloader.ImageLoader
+import com.seiko.imageloader.ImageLoaderBuilder
+import com.seiko.imageloader.LocalImageLoader
+import com.seiko.imageloader.cache.disk.DiskCacheBuilder
+import com.seiko.imageloader.cache.memory.MemoryCacheBuilder
 import kotlinx.coroutines.launch
-
-@Composable
-fun MyApplicationTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colors = if (darkTheme) {
-        darkColors(
-            primary = Color(0xFFBB86FC),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
-    } else {
-        lightColors(
-            primary = Color(0xFF6200EE),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
-    }
-    val typography = Typography(
-        body1 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
-        )
-    )
-    val shapes = Shapes(
-        small = RoundedCornerShape(4.dp),
-        medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp)
-    )
-
-    MaterialTheme(
-        colors = colors,
-        typography = typography,
-        shapes = shapes,
-        content = content
-    )
-}
+import okio.Path.Companion.toOkioPath
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = Color(0xFFFFFFFF)
+            ) {
+                val viewModel = CharacterListViewModel(Greeting().rickAndMortyAPI)
+                CompositionLocalProvider(
+                    LocalImageLoader provides generateImageLoader(),
                 ) {
-                    Greeting(Greeting().greeting())
+                    CharacterScreen(viewModel)
                 }
             }
         }
     }
-}
 
-val greeting by lazy {
-    Greeting()
-}
-var html = mutableStateOf("")
-@Composable
-fun Greeting(text: String) {
-    MyApplicationTheme {
-        val value = remember { html }
-        LaunchedEffect("Html"){
-
-            html.value = greeting.rickAndMortyAPI.fetchCharacters(1,10).toString()
-        }
-        Text("${Greeting().greeting()} ${value.value}")
+    private fun generateImageLoader(): ImageLoader {
+        return ImageLoaderBuilder(this)
+            .memoryCache {
+                MemoryCacheBuilder(this)
+                    // Set the max size to 25% of the app's available memory.
+                    .maxSizePercent(0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCacheBuilder()
+                    .directory(cacheDir.resolve("image_cache").toOkioPath())
+                    .maxSizeBytes(512L * 1024 * 1024) // 512MB
+                    .build()
+            }
+            .build()
     }
 }

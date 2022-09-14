@@ -1,15 +1,16 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("org.jetbrains.compose")
 }
 
 android {
     namespace = "com.makeevrserg.simplekmm.android"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.makeevrserg.simplekmm.android"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }
@@ -34,6 +35,7 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":domain"))
+    implementation(project(":shared-ui"))
     implementation("androidx.compose.ui:ui:1.2.1")
     implementation("androidx.compose.ui:ui-tooling:1.2.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")

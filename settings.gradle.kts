@@ -1,12 +1,13 @@
 pluginManagement {
     repositories {
-        google()
         gradlePluginPortal()
-        mavenLocal()
         mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        mavenLocal()
+        google()
         maven("https://oss.sonatype.org/content/repositories/snapshots")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://kotlin.bintray.com/kotlinx/")
+        maven("https://plugins.gradle.org/m2/")
         maven("https://jitpack.io")
     }
 
@@ -14,13 +15,14 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        google()
         gradlePluginPortal()
-        mavenLocal()
         mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        mavenLocal()
+        google()
         maven("https://oss.sonatype.org/content/repositories/snapshots")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://kotlin.bintray.com/kotlinx/")
+        maven("https://plugins.gradle.org/m2/")
         maven("https://jitpack.io")
     }
 }
@@ -30,3 +32,4 @@ include(":androidApp")
 include(":desktop")
 include(":shared")
 include(":domain")
+include(":shared-ui")

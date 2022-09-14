@@ -19,6 +19,7 @@ kotlin {
             dependencies {
                 implementation(project(":shared"))
                 implementation(project(":domain"))
+                implementation(project(":shared-ui"))
                 implementation(compose.desktop.currentOs)
             }
         }

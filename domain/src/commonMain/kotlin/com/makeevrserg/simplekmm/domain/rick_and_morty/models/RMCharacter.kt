@@ -3,7 +3,7 @@ package com.makeevrserg.simplekmm.domain.rick_and_morty.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Result(
+data class RMCharacter(
     val created: String,
     val episode: List<String>,
     val gender: String,
