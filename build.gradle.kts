@@ -6,9 +6,12 @@ plugins {
     kotlin("multiplatform").version("1.7.10").apply(false)
     kotlin("plugin.serialization").version("1.7.10").apply(false)
     id("org.jetbrains.compose").version("1.2.0-alpha01-dev774").apply(false)
+    id("com.google.devtools.ksp").version("1.7.10-1.0.6").apply(false)
 }
 repositories {
     google()
+    gradlePluginPortal()
+    mavenLocal()
     mavenCentral()
     maven("https://plugins.gradle.org/m2/")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")

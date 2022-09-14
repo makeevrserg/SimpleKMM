@@ -25,6 +25,7 @@ kotlin {
 //        val jvmTest by getting
     }
 }
+
 compose.desktop {
     application {
         mainClass = "com.makeevrserg.simplekmm.desktop.MainKt"

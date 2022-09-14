@@ -20,7 +20,7 @@ fun main() = application {
         val value = remember { html }
         LaunchedEffect("Html"){
 
-            html.value = greeting.rickAndMortyDataSource.getCharacters(1,10).toString()
+            html.value = greeting.rickAndMortyAPI.fetchCharacters(1,10).toString()
         }
         Text("${Greeting().greeting()} ${value.value}")
     }

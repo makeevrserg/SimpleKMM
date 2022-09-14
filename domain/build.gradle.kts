@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.google.devtools.ksp")
 }
 repositories {
     google()
@@ -17,16 +18,22 @@ repositories {
 }
 val ktorVersion = "2.1.1"
 val serialization_version = "1.2.1"
+val ktorfitVersion = "1.0.0-beta13"
 kotlin {
     android()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    jvm("desktop") {
+    jvm() {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
     }
+//    jvm("desktop") {
+//        compilations.all {
+//            kotlinOptions.jvmTarget = "11"
+//        }
+//    }
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -50,6 +57,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+                implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
             }
         }
         val commonTest by getting {
@@ -57,7 +65,8 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val desktopMain by getting {
+
+        val jvmMain by getting {
             dependencies {
                 api(compose.ui)
                 api(compose.preview)
@@ -65,6 +74,15 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
+//        val desktopMain by getting {
+//            dependencies {
+//                api(compose.ui)
+//                api(compose.preview)
+//                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+//                implementation("io.ktor:ktor-client-core:$ktorVersion")
+//            }
+//        }
+
         val androidMain by getting{
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
@@ -101,4 +119,14 @@ android {
         minSdk = 21
         targetSdk = 32
     }
+}
+
+
+dependencies {
+    add("kspCommonMainMetadata", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+    add("kspAndroid", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+    add("kspIosX64", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+    add("kspIosSimulatorArm64", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+    add("kspJvm", "de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+
 }

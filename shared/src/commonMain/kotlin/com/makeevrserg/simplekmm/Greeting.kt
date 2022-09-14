@@ -1,6 +1,7 @@
 package com.makeevrserg.simplekmm
 
-import com.makeevrserg.simplekmm.domain.rick_and_morty.RickAndMortyDataSource
+import com.makeevrserg.simplekmm.domain.rick_and_morty.Builder
+import com.makeevrserg.simplekmm.domain.rick_and_morty.RickAndMortyAPI
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
@@ -11,16 +12,16 @@ import kotlinx.serialization.json.Json
 class Greeting {
     private val platform: Platform = getPlatform()
 
-    private val client = HttpClient{
-        install(ContentNegotiation){
-            json(Json{
+    private val client = HttpClient {
+        install(ContentNegotiation) {
+            json(Json {
                 prettyPrint = true
                 isLenient = true
                 ignoreUnknownKeys = true
             })
         }
     }
-    val rickAndMortyDataSource = RickAndMortyDataSource(client)
+    val rickAndMortyAPI: RickAndMortyAPI = Builder.rickAndMortyAPI
     suspend fun getHtml(): String {
         val response = client.get("https://ktor.io/docs")
         return response.bodyAsText()
