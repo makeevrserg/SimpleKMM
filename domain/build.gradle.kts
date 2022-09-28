@@ -55,9 +55,12 @@ kotlin {
                 implementation("io.ktor:ktor-client-serialization:${ktorVersion}")
                 implementation("io.ktor:ktor-client-json:${ktorVersion}")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
                 implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
+                implementation("io.ktor:ktor-client-websockets:$ktorVersion")
+                // Serialization
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-cbor:$ktorVersion")
             }
         }
         val commonTest by getting {

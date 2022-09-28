@@ -20,7 +20,7 @@ repositories {
 }
 
 val ktorVersion = "2.1.1"
-val serialization_version = "1.2.1"
+val serializationJson = "1.4.0"
 val ktorfitVersion = "1.0.0-beta13"
 kotlin {
     android()
@@ -58,10 +58,14 @@ kotlin {
                 implementation("io.ktor:ktor-client-serialization:${ktorVersion}")
                 implementation("io.ktor:ktor-client-json:${ktorVersion}")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-client-websockets:$ktorVersion")
+                // Serialization
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationJson")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+                implementation("io.ktor:ktor-serialization-kotlinx-cbor:$ktorVersion")
+
+                implementation("com.squareup.okio:okio:3.2.0")
                 implementation(project(":domain"))
-//                implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
             }
         }
         val commonTest by getting {
@@ -76,6 +80,8 @@ kotlin {
                 api(compose.preview)
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("org.threeten:threetenbp:1.6.0")
+                implementation("org.mongodb:mongo-java-driver:3.12.11")
             }
         }
 //        val desktopMain by getting {
