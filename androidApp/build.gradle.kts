@@ -1,15 +1,17 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("org.jetbrains.compose")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.makeevrserg.simplekmm.android"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.makeevrserg.simplekmm.android"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }
@@ -32,14 +34,18 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
-    implementation(project(":domain"))
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.2.1")
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(compose.material)
+
+    implementation(project(":shared-ui"))
+
+    implementation("androidx.activity:activity-compose:1.6.0")
+
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
+    implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+    implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
     implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.activity:activity-compose:1.5.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
 }

@@ -15,6 +15,16 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://jitpack.io")
 }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://plugins.gradle.org/m2/")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
+        maven("https://jitpack.io")
+    }
+}
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

@@ -7,16 +7,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
 }
-repositories {
-    google()
-    mavenCentral()
-    maven("https://plugins.gradle.org/m2/")
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://jitpack.io")
-}
-val ktorVersion = "2.1.1"
-val serialization_version = "1.2.1"
+
 kotlin {
     android()
     iosX64()
@@ -27,6 +18,7 @@ kotlin {
             kotlinOptions.jvmTarget = "11"
         }
     }
+
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -41,16 +33,21 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                // Compose
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:${ktorVersion}")
-                implementation("io.ktor:ktor-client-json:${ktorVersion}")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
-                implementation(project(":domain"))
+                // Ktor
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-serialization:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-json:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-content-negotiation:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:${Dependencies.Domain.ktor}")
+                // Serializtion
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Dependencies.Kotlin.serializationJson}")
+                // Navigation
+                implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
             }
         }
         val commonTest by getting {
@@ -58,17 +55,27 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+
         val desktopMain by getting {
             dependencies {
-                api(compose.ui)
                 api(compose.preview)
-                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
+//                implementation("org.threeten:threetenbp:1.6.0")
             }
         }
-        val androidMain by getting{
+
+        val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation(compose.foundation)
+                implementation(compose.ui)
+                implementation(compose.material)
+                implementation(compose.materialIconsExtended)
+                implementation(compose.runtime)
+                implementation(compose.preview)
+                implementation(compose.uiTooling)
+                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
             }
         }
         val androidTest by getting
@@ -81,7 +88,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation("io.ktor:ktor-client-darwin:${Dependencies.Domain.ktor}")
             }
         }
         val iosX64Test by getting
@@ -97,9 +104,22 @@ kotlin {
 }
 android {
     namespace = "com.makeevrserg.simplekmm"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
     }
 }
+dependencies {
+    implementation("androidx.compose.ui:ui-graphics:1.2.1")
+}
+
+
+//dependencies {
+//    add("kspCommonMainMetadata", "de.jensklingenberg.ktorfit:ktorfit-ksp:${Dependencies.Kotlin.ktorfit}")
+//    add("kspAndroid", "de.jensklingenberg.ktorfit:ktorfit-ksp:${Dependencies.Kotlin.ktorfit}")
+//    add("kspIosX64", "de.jensklingenberg.ktorfit:ktorfit-ksp:${Dependencies.Kotlin.ktorfit}")
+//    add("kspIosSimulatorArm64", "de.jensklingenberg.ktorfit:ktorfit-ksp:${Dependencies.Kotlin.ktorfit}")
+//    add("kspJvm", "de.jensklingenberg.ktorfit:ktorfit-ksp:${Dependencies.Kotlin.ktorfit}")
+//
+//}

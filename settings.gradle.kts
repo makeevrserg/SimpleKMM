@@ -23,4 +23,4 @@ rootProject.name = "SimpleKMM"
 include(":androidApp")
 include(":desktop")
 include(":shared")
-include(":domain")
+include(":shared-ui")
