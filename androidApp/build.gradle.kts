@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("org.jetbrains.compose")
-    id("kotlin-parcelize")
 }
 
 android {
@@ -34,18 +33,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared-ui"))
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)
-
-    implementation(project(":shared-ui"))
-
+    // Android compose
     implementation("androidx.activity:activity-compose:1.6.0")
-
-    implementation("io.coil-kt:coil-compose:2.2.2")
-
+    implementation("androidx.compose.material:material:1.2.1")
+    // Navigation
     implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
     implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
-    implementation("androidx.compose.material:material:1.2.1")
 
 }
