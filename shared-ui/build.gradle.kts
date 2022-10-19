@@ -7,24 +7,15 @@ plugins {
 //    kotlin("native.cocoapods")
     id("com.android.library")
 }
-repositories {
-    google()
-    mavenCentral()
-    maven("https://plugins.gradle.org/m2/")
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://jitpack.io")
-}
-val ktorVersion = "2.1.1"
-val serialization_version = "1.2.1"
-val koil = "2.2.1"
 val qdsfdhvh = "1.1.8"
 kotlin {
-    android()
+    android(){
+        apply(plugin="kotlin-parcelize")
+    }
 //    iosX64()
 //    iosArm64()
 //    iosSimulatorArm64()
-    jvm() {
+    jvm("desktop") {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
@@ -51,15 +42,12 @@ kotlin {
                 implementation(compose.preview)
                 implementation(compose.uiTooling)
                 implementation(compose("org.jetbrains.compose.ui:ui-tooling"))
-                api("io.github.qdsfdhvh:image-loader:$qdsfdhvh")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-                implementation(project(":domain"))
+//                api("io.github.qdsfdhvh:image-loader:$qdsfdhvh")
                 implementation(project(":shared"))
 
-                val decompose = "1.0.0-alpha-04"
-                api("com.arkivanov.decompose:extensions-compose-jetpack:$decompose")
-                api("com.arkivanov.decompose:extensions-compose-jetbrains:$decompose")
-                api("com.arkivanov.decompose:decompose:$decompose")
+                // Navigation
+                implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
             }
         }
         val commonTest by getting {
@@ -72,14 +60,20 @@ kotlin {
 //                dependsOn(commonMain)
 //            }
 //        }
-        val jvmMain by getting {
+        val desktopMain by getting {
             dependencies {
-                dependsOn(commonMain)
+                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
             }
         }
-        val androidMain by getting{
+        val androidMain by getting {
             dependencies {
-                dependsOn(commonMain)
+                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
+                implementation("io.coil-kt:coil-compose:2.2.2")
+
+                implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
             }
         }
         val androidTest by getting
@@ -112,8 +106,18 @@ android {
         minSdk = 21
         targetSdk = 33
     }
+    dependencies {
+        implementation("io.coil-kt:coil-compose:2.2.2")
+
+        implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+        implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
+    }
 }
 dependencies {
-//    implementation("androidx.compose.ui:ui-tooling-preview:1.0.0-rc01")
+    implementation("androidx.compose.ui:ui:1.2.1")
+    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+    implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
+    //    implementation("androidx.compose.ui:ui-tooling-preview:1.0.0-rc01")
 //    debugImplementation("androidx.compose.ui:ui-tooling:1.0.0-rc01")
 }

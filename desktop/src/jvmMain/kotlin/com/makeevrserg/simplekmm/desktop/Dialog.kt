@@ -18,7 +18,7 @@ fun DialogConfirm(dialogMessage: DialogMessage?) {
     dialogMessage?.let {
         AlertDialog(onDismissRequest = {},
             confirmButton = {
-                TextButton(viewModel::onDialogClicked) {
+                TextButton({}) {
                     Text("Ok")
                 }
             },

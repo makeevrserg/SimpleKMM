@@ -10,66 +10,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
-import com.makeevrserg.simplekmm.KMMApplication
-import com.makeevrserg.simplekmm.ui.CharacterListViewModel
-import com.makeevrserg.simplekmm.ui.character.CharacterScreen
-import com.makeevrserg.simplekmm.ui.characters.CharactersScreen
-import com.seiko.imageloader.ImageLoaderBuilder
-import com.seiko.imageloader.LocalImageLoader
+import androidx.compose.ui.window.singleWindowApplication
+import com.arkivanov.decompose.DefaultComponentContext
+import com.arkivanov.decompose.ExperimentalDecomposeApi
+import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
+import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import com.makeevrserg.simplekmm.ui.presentation.characters.CharactersScreen
+import com.makeevrserg.simplekmm.ui.navigation.NavHostComponent
+import javax.swing.SwingUtilities
 
 
-val viewModel by lazy {
-    ViewModel()
-}
+@OptIn(ExperimentalDecomposeApi::class)
+fun main() {
+    val windowState = WindowState()
+    val lifecycle = LifecycleRegistry()
+    val root = runOnMainThreadBlocking { NavHostComponent(DefaultComponentContext(lifecycle)) }
 
-@Composable
-fun Input(value: String, onValueChange: (String) -> Unit) {
-    TextField(value = value, onValueChange = onValueChange, modifier = Modifier.fillMaxWidth())
-}
-
-fun main() = application {
-    Window(::exitApplication) {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            MaterialTheme {
-                DesktopTheme {
-                    CompositionLocalProvider(
-                        LocalImageLoader provides ImageLoaderBuilder().build(),
-                    ) {
-                        CharactersScreen(KMMApplication()){}
-//                        NavigationScreen()
-
-                    }
-                }
-            }
-        }
+    singleWindowApplication(
+        state = windowState,
+        title = "Decompose Desktop Example",
+    ) {
+        LifecycleController(lifecycle, windowState)
+        root.render()
     }
+}
 
-//    Window(onCloseRequest = ::exitApplication) {
-//        val uiState by viewModel.uiState.asStateFlow().collectAsState(UiState())
-//        val dialogMessageState by viewModel.dialogMessage.asStateFlow().collectAsState(null)
-//        if (uiState.isLoading){
-//            LoadingDialog()
-//        }
-//        dialogMessageState?.let{
-//            DialogConfirm(it)
-//        }
-//        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-//            LazyColumn(Modifier.fillMaxWidth()) {
-//                item { Input(uiState.mail, onValueChange = viewModel::onMailEntered) }
-//                item { Input(uiState.phone, onValueChange = viewModel::onPhoneEntered) }
-//                item { Input(uiState.password, onValueChange = viewModel::onPasswordEntered) }
-//                item {
-//                    Button(onClick = {
-//                        viewModel.sendAuthMessage()
-//                    }) {
-//                        Text("Войти")
-//                    }
-//                }
-//            }
-//
-//
-//        }
-
-//    }
+private inline fun <T : Any> runOnMainThreadBlocking(crossinline block: () -> T): T {
+    lateinit var result: T
+    SwingUtilities.invokeAndWait { result = block() }
+    return result
 }
