@@ -7,7 +7,6 @@ plugins {
 //    kotlin("native.cocoapods")
     id("com.android.library")
 }
-val qdsfdhvh = "1.1.8"
 kotlin {
     android(){
         apply(plugin="kotlin-parcelize")
@@ -41,10 +40,10 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.preview)
                 implementation(compose.uiTooling)
-                implementation(compose("org.jetbrains.compose.ui:ui-tooling"))
-//                api("io.github.qdsfdhvh:image-loader:$qdsfdhvh")
                 implementation(project(":shared"))
 
+                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
                 // Navigation
                 implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
                 implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
@@ -60,22 +59,8 @@ kotlin {
 //                dependsOn(commonMain)
 //            }
 //        }
-        val desktopMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
-                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-okhttp:${Dependencies.Domain.ktor}")
-                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
-                implementation("io.coil-kt:coil-compose:2.2.2")
-
-                implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
-                implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
-            }
-        }
+        val desktopMain by getting
+        val androidMain by getting
         val androidTest by getting
 //        val iosX64Main by getting
 //        val iosArm64Main by getting
@@ -108,16 +93,5 @@ android {
     }
     dependencies {
         implementation("io.coil-kt:coil-compose:2.2.2")
-
-        implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
-        implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
     }
-}
-dependencies {
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("io.coil-kt:coil-compose:2.2.2")
-    implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
-    implementation ("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
-    //    implementation("androidx.compose.ui:ui-tooling-preview:1.0.0-rc01")
-//    debugImplementation("androidx.compose.ui:ui-tooling:1.0.0-rc01")
 }
