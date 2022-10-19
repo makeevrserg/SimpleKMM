@@ -1,8 +1,11 @@
 package com.makeevrserg.simplekmm.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 
 private val viewModels = hashMapOf<ComponentContext, BaseViewModel>()
-fun <T:BaseViewModel> viewModelFactory(componentContext: ComponentContext, viewModel: () -> T): T {
-    return viewModels[componentContext] as? T ?: viewModel().also { viewModels[componentContext] = it }
+inline fun <reified T:BaseViewModel> viewModelFactory(componentContext: ComponentContext, viewModel: () -> T): T {
+    return componentContext.instanceKeeper.getOrCreate {
+        viewModel()
+    }
 }
