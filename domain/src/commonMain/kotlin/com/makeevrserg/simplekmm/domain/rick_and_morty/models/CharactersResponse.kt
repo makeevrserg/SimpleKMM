@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CharactersResponse(
-    val info: Info,
-    val results: List<RMCharacter>
+    val info: Info? = null,
+    val results: List<Result> = emptyList()
 )

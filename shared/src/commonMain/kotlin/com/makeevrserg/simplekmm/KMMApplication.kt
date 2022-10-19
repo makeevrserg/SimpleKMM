@@ -6,7 +6,6 @@ import com.makeevrserg.simplekmm.models.AuthAdminRequest
 import com.makeevrserg.simplekmm.models.base.ErrorResponse
 import com.makeevrserg.simplekmm.models.base.ErrorSocketMessage
 import com.makeevrserg.simplekmm.models.base.GenericSocketMessage
-import com.makeevrserg.simplekmm.models.base.createGenericSocketMessage
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.websocket.*
@@ -56,7 +55,7 @@ class KMMApplication {
     }
     val webSocketSession by lazy {
         runBlocking {
-            socketClient.webSocketSession(urlString = ) {
+            socketClient.webSocketSession(urlString ="wss://aaa.ru" ) {
             }
         }
     }

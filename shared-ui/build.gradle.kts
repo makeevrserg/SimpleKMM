@@ -54,6 +54,12 @@ kotlin {
                 api("io.github.qdsfdhvh:image-loader:$qdsfdhvh")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation(project(":domain"))
+                implementation(project(":shared"))
+
+                val decompose = "1.0.0-alpha-04"
+                api("com.arkivanov.decompose:extensions-compose-jetpack:$decompose")
+                api("com.arkivanov.decompose:extensions-compose-jetbrains:$decompose")
+                api("com.arkivanov.decompose:decompose:$decompose")
             }
         }
         val commonTest by getting {

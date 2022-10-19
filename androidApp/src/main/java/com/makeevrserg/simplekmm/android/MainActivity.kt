@@ -1,16 +1,13 @@
 package com.makeevrserg.simplekmm.android
 
-import CharacterScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.makeevrserg.simplekmm.KMMApplication
 import com.makeevrserg.simplekmm.ui.CharacterListViewModel
+import com.makeevrserg.simplekmm.ui.characters.CharactersScreen
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.ImageLoaderBuilder
 import com.seiko.imageloader.LocalImageLoader
@@ -21,18 +18,14 @@ import okio.Path.Companion.toOkioPath
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = Color(0xFFFFFFFF)
-            ) {
-                val viewModel = CharacterListViewModel(KMMApplication().rickAndMortyAPI)
-                CompositionLocalProvider(
-                    LocalImageLoader provides generateImageLoader(),
-                ) {
-                    CharacterScreen(viewModel)
-                }
-            }
+                    CompositionLocalProvider(
+                        LocalImageLoader provides generateImageLoader()
+                    ) {
+                        CharactersScreen(KMMApplication()){}
+                    }
         }
     }
 

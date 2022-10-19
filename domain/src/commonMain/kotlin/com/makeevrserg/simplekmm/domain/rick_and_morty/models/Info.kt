@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Info(
-    val count: Int,
-    val next: String,
-    val pages: Int,
-//    val prev: Any
+    val count: Int = 0,
+    val next: String? = null,
+    val pages: Int = 0,
+    val prev: String? = null
 )
