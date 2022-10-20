@@ -10,21 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.push
 import com.makeevrserg.simplekmm.modules.RickAndMortyApiModule
 import com.makeevrserg.simplekmm.ui.navigation.AppScreen
+import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Colors
 import com.makeevrserg.simplekmm.ui.theme.Typography
-import com.makeevrserg.simplekmm.ui.viewModelFactory
 
 @Composable
-fun CharactersScreen(
-    componentContext: ComponentContext,
-    navigation: StackNavigation<AppScreen>
-) {
-    val viewModel: CharacterListViewModel = viewModelFactory(componentContext) {
+fun CharactersScreen(navigation: AppScreenNavigation) {
+    val viewModel: CharacterListViewModel = navigation.viewModelFactory(CharacterListViewModel::class.java) {
         CharacterListViewModel(RickAndMortyApiModule.value)
     }
     val list by viewModel.characterList.collectAsState()
@@ -34,7 +28,7 @@ fun CharactersScreen(
         }
         items(list) {
             CharacterRow(it) {
-                navigation.push(AppScreen.Character(it.id))
+                navigation.nextScreen(AppScreen.Character(it.id))
             }
         }
     }

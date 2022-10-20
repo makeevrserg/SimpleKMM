@@ -10,6 +10,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.scal
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.makeevrserg.simplekmm.ui.navigation.wrapper.DecomposeNavigation
 import com.makeevrserg.simplekmm.ui.presentation.character.CharacterScreen
 import com.makeevrserg.simplekmm.ui.presentation.characters.CharactersScreen
 
@@ -26,6 +27,7 @@ class NavHostComponent(
         childFactory = ::createScreenComponent
     )
 
+
     /**
      * Factory function to create screen from given ScreenConfig
      */
@@ -33,28 +35,14 @@ class NavHostComponent(
         screenConfig: AppScreen,
         componentContext: ComponentContext
     ): Component {
+        val decomposeNavigation = DecomposeNavigation(componentContext, navigation)
         return when (screenConfig) {
-
-            is AppScreen.Characters -> object : Component {
-                @Composable
-                override fun render() {
-                    CharactersScreen(
-                        componentContext,
-                        navigation
-                    )
-                }
+            is AppScreen.Characters -> Component.composeComponent {
+                CharactersScreen(decomposeNavigation)
             }
 
-            is AppScreen.Character -> object : Component {
-                @Composable
-                override fun render() {
-                    CharacterScreen(
-                        screenConfig.id,
-                        componentContext,
-                        navigation
-                    )
-                }
-
+            is AppScreen.Character -> Component.composeComponent {
+                CharacterScreen(screenConfig.id, decomposeNavigation)
             }
         }
     }

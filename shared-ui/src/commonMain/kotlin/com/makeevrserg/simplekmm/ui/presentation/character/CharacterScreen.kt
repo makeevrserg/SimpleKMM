@@ -9,23 +9,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.pop
 import com.makeevrserg.simplekmm.modules.RickAndMortyApiModule
 import com.makeevrserg.simplekmm.ui.KMMImage
-import com.makeevrserg.simplekmm.ui.navigation.AppScreen
+import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Typography
-import com.makeevrserg.simplekmm.ui.viewModelFactory
 
 
 @Composable
 fun CharacterScreen(
     id: Int,
-    componentContext: ComponentContext,
-    navigation: StackNavigation<AppScreen>
+    navigation: AppScreenNavigation
 ) {
-    val characterViewModel = viewModelFactory(componentContext) {
+    val characterViewModel = navigation.viewModelFactory(CharacterViewModel::class.java) {
         CharacterViewModel(id, RickAndMortyApiModule.value)
     }
     val character by characterViewModel.character.collectAsState()
