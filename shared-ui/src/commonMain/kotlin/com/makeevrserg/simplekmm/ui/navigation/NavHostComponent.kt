@@ -13,6 +13,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.DecomposeNavigation
 import com.makeevrserg.simplekmm.ui.presentation.character.CharacterScreen
 import com.makeevrserg.simplekmm.ui.presentation.characters.CharactersScreen
+import com.makeevrserg.simplekmm.ui.presentation.choose_screen.ChooseScreen
 
 /**
  * Navigator
@@ -23,7 +24,7 @@ class NavHostComponent(
     private val navigation = StackNavigation<AppScreen>()
     private val stack = childStack(
         source = navigation,
-        initialConfiguration = AppScreen.Characters,
+        initialConfiguration = AppScreen.Initial,
         childFactory = ::createScreenComponent
     )
 
@@ -37,6 +38,10 @@ class NavHostComponent(
     ): Component {
         val decomposeNavigation = DecomposeNavigation(componentContext, navigation)
         return when (screenConfig) {
+            is AppScreen.Main -> Component.composeComponent {
+                ChooseScreen(decomposeNavigation)
+            }
+
             is AppScreen.Characters -> Component.composeComponent {
                 CharactersScreen(decomposeNavigation)
             }

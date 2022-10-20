@@ -48,6 +48,7 @@ object Dependencies {
         const val kaml = "0.46.0"
         const val serializationJson = "1.3.3"
         const val decompose = "1.0.0-alpha-06"
+        const val dateTime = "0.4.0"
     }
 
     object Android {

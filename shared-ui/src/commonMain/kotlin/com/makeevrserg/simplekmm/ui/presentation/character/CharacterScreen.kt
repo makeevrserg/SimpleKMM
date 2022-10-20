@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.simplekmm.modules.RickAndMortyApiModule
 import com.makeevrserg.simplekmm.ui.KMMImage
+import com.makeevrserg.simplekmm.ui.components.BackTopBar
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Typography
 
@@ -25,13 +26,7 @@ fun CharacterScreen(
     }
     val character by characterViewModel.character.collectAsState()
     Column {
-        TopAppBar {
-            IconButton(onClick = {
-                navigation.pop()
-            }) {
-                Icon(Icons.Filled.KeyboardArrowLeft, "")
-            }
-        }
+        BackTopBar(navigation)
         character?.let { character ->
             Row {
                 Box(Modifier.size(64.dp)) {
