@@ -8,12 +8,14 @@ import io.ktor.http.ContentDisposition.Companion.File
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
 import ru.astrainteractive.astralearner.dto.FileDTO
+import ru.astrainteractive.astralearner.dto.ListFilter
 import ru.astrainteractive.astralearner.response.PagingResponse
 
 
 class LocalDatabaseAPI(private val client: HttpClient) : ILocalDatabaseAPI {
 
-    override suspend fun getFiles(page: Int): PagingResponse<FileDTO> = client.get {
+    override suspend fun getFiles(page: Int, filter: ListFilter): PagingResponse<FileDTO> = client.post {
+        setBody(filter)
         contentType(ContentType.Application.Json)
         parameter("page", page)
         url(LocalDBRoutes.Files)

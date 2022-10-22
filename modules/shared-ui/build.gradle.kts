@@ -35,6 +35,7 @@ kotlin {
                 // Navigation
                 implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
                 implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
+
             }
         }
         val commonTest by getting {

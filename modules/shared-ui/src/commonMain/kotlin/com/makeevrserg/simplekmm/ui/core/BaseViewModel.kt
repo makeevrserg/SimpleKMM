@@ -1,10 +1,11 @@
-package com.makeevrserg.simplekmm.ui
+package com.makeevrserg.simplekmm.ui.core
 
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel:InstanceKeeper.Instance {
+abstract class BaseViewModel : InstanceKeeper.Instance {
     val viewModelScope = object : CoroutineScope {
         private val job: Job
             get() = Job()
@@ -16,8 +17,9 @@ abstract class BaseViewModel:InstanceKeeper.Instance {
     override fun onDestroy() {
         clear()
     }
+
     fun clear() {
-        println("ViewModel cleared")
         viewModelScope.cancel()
     }
 }
+

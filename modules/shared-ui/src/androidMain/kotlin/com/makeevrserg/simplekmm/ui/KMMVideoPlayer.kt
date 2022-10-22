@@ -4,6 +4,8 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
+import com.makeevrserg.simplekmm.ui.player.IPlayerEvent
+import com.makeevrserg.simplekmm.ui.player.PlayerState
 import kotlinx.coroutines.*
 
 
@@ -29,7 +31,7 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
         super.onIsPlayingChanged(isPlaying)
-        event.onStateChanged(if (isPlaying) PlayState.Playing else return)
+        event.onStateChanged(if (isPlaying) PlayerState.Playing else return)
     }
 
 

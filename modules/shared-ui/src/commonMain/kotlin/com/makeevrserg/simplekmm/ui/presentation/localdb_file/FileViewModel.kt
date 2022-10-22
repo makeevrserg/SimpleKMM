@@ -2,10 +2,10 @@ package com.makeevrserg.simplekmm.ui.presentation.localdb_file
 
 import com.makeevrserg.simplekmm.localb_api.ILocalDatabaseAPI
 import com.makeevrserg.simplekmm.localb_api.LocalDBRoutes
-import com.makeevrserg.simplekmm.ui.BaseViewModel
-import com.makeevrserg.simplekmm.ui.IPlayerEvent
-import com.makeevrserg.simplekmm.ui.KMMVideoPlayer
-import com.makeevrserg.simplekmm.ui.PlayState
+import com.makeevrserg.simplekmm.ui.*
+import com.makeevrserg.simplekmm.ui.core.StateViewModel
+import com.makeevrserg.simplekmm.ui.player.IPlayerEvent
+import com.makeevrserg.simplekmm.ui.player.PlayerState
 import com.makeevrserg.simplekmm.ui.ui.IUIDialogAction
 import com.makeevrserg.simplekmm.ui.ui.UIDialogButton
 import com.makeevrserg.simplekmm.ui.ui.UIDialogMessage
@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import ru.astrainteractive.astralearner.dto.FileDTO
 import ru.astrainteractive.astralearner.dto.FileType
 
-
-class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : BaseViewModel(), IUIDialogAction, IPlayerEvent {
+class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : StateViewModel<ScreenState>(), IUIDialogAction,
+    IPlayerEvent {
     override val uiDialog: MutableStateFlow<UIDialogMessage?> by nullableStateFlow()
     val videoUrlLiveEvent by emptyLiveEvent<String>()
     override fun onPlayBackError() {
@@ -33,45 +33,38 @@ class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : BaseViewModel(), 
         ).send()
     }
 
-    val state = MutableStateFlow<ScreenState>(createScreenState())
-    fun onSeeking(progress: Float) {
-        (this.state.value as? ScreenState.Video)?.let {
-            state.value = it.copy(isSeeking = true, currentPosition = progress.toLong())
+    override val state = MutableStateFlow<ScreenState>(createScreenState())
+
+    fun onSeeking(progress: Float) = updateState<ScreenState.Video> {
+        copy(isSeeking = true, currentPosition = progress.toLong())
+    }
+
+    fun onValueChangeFinished() = updateState<ScreenState.Video> {
+        copy(isSeeking = false).also {
+            player.seek(it.currentPosition.toFloat())
         }
     }
 
-    fun onValueChangeFinishid() {
-        (this.state.value as? ScreenState.Video)?.let {
-            state.value = it.copy(isSeeking = false)
-            it.player.seek(it.currentPosition.toFloat())
-        }
-
+    override fun onStateChanged(state: PlayerState) = updateState<ScreenState.Video> {
+        copy(state = state)
     }
 
-    override fun onStateChanged(state: PlayState) {
-        (this.state.value as? ScreenState.Video)?.let {
-            this.state.value = it.copy(state = state)
-        }
+
+    override fun onDurationAccessible(duration: Long) = updateState<ScreenState.Video> {
+        copy(duration = duration)
     }
 
-    override fun onDurationAccessible(duration: Long) {
-        (this.state.value as? ScreenState.Video)?.let {
-            this.state.value = it.copy(duration = duration)
-        }
-    }
 
-    override fun onPlay(currentPosition: Long) {
-        (this.state.value as? ScreenState.Video)?.let {
-            if (it.isSeeking) return@let
-            this.state.value = it.copy(currentPosition = currentPosition)
-        }
+    override fun onPlay(currentPosition: Long) = updateState<ScreenState.Video> {
+        if (isSeeking) return
+        copy(currentPosition = currentPosition)
     }
 
 
     fun createScreenState(): ScreenState {
         val file = Injector.get<FileDTO>()
         return if (file.type == FileType.MP4 || file.type == FileType.WEBM) {
-            val player = KMMVideoPlayer(LocalDBRoutes.filePath(file.id?:-1), this)
+            val player = KMMVideoPlayer(LocalDBRoutes.filePath(file.id ?: -1), this)
             ScreenState.Video(file, player)
         } else {
             ScreenState.Image(file)
@@ -84,3 +77,4 @@ class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : BaseViewModel(), 
         (state.value as? ScreenState.Video)?.player?.destroyPlayer()
     }
 }
+

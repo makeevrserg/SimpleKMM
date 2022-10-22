@@ -43,11 +43,10 @@ fun <T> PagingCollector<T>.collect(state: LazyGridState) {
 }
 
 class PagingCollector<T>(
-    private val size: Int,
     private val initialPage: Int,
     val coroutineScope: CoroutineScope,
     private val onUpdated: (List<T>) -> Unit,
-    private val loader: suspend (size: Int, page: Int) -> List<T>?
+    private val loader: suspend ( page: Int) -> List<T>?
 ) {
     var page = initialPage - 1
     private var isLastPage: Boolean = false
@@ -66,10 +65,10 @@ class PagingCollector<T>(
         println("Loading page: $page")
         isLoading = true
         val nextPage = page + 1
-        val nextList = loader(size, nextPage)
+        val nextList = loader(nextPage)
         if (!nextList.isNullOrEmpty())
             page = nextPage
-        if (nextList != null && nextList.size < size)
+        if (nextList != null && nextList.isEmpty())
             isLastPage = true
         list.update {
             it.toMutableList().apply {

@@ -5,7 +5,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
-import com.makeevrserg.simplekmm.ui.BaseViewModel
+import com.makeevrserg.simplekmm.ui.core.BaseViewModel
 import com.makeevrserg.simplekmm.ui.navigation.AppScreen
 
 class DecomposeNavigation(

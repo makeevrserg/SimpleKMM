@@ -1,4 +1,4 @@
-package com.makeevrserg.simplekmm.ui.presentation.localdb_file
+package com.makeevrserg.simplekmm.ui.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

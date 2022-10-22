@@ -1,4 +1,4 @@
-package com.makeevrserg.simplekmm.ui.presentation.localdb_file
+package com.makeevrserg.simplekmm.ui.presentation.localdb_file.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

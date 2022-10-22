@@ -11,6 +11,9 @@ import com.makeevrserg.simplekmm.ui.components.BackTopBar
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.ui.UiDialogListener
 import com.makeevrserg.simplekmm.ui.KMMExternalPlayer
+import com.makeevrserg.simplekmm.ui.components.UiDialogMessage
+import com.makeevrserg.simplekmm.ui.presentation.localdb_file.components.DisplayImage
+import com.makeevrserg.simplekmm.ui.presentation.localdb_file.components.DisplayVideo
 
 
 @Composable
@@ -34,7 +37,7 @@ fun FileScreen(id: Int, navigation: AppScreenNavigation) {
             is ScreenState.Image -> DisplayImage(localState.file)
             is ScreenState.Video -> DisplayVideo(localState.file, localState,
                 onValueChangeFinished = {
-                    viewModel.onValueChangeFinishid()
+                    viewModel.onValueChangeFinished()
                 },
                 onValueChange = {
                     viewModel.onSeeking(it)
