@@ -19,6 +19,7 @@ class FilesViewModel(val api: ILocalDatabaseAPI) : BaseViewModel() {
 
     fun onRefreshClicked() = viewModelScope.launch(Dispatchers.IO) {
         collector.reset()
+        collector.loadNextPage()
     }
 
     fun onFilterClicked(fileType: FileType) {

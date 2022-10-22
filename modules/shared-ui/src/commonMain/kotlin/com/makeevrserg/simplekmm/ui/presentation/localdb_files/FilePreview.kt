@@ -23,7 +23,7 @@ val FileDTO.thumbnailUrl: String
 
 @Composable
 fun FileDTOPreview(
-    modifier: Modifier = Modifier.size(128.dp),
+    modifier: Modifier = Modifier.size(64.dp),
     contentScale: ContentScale = ContentScale.Crop,
     fileDTO: FileDTO,
     onClick: () -> Unit

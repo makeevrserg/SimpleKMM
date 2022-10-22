@@ -9,7 +9,7 @@ import com.makeevrserg.simplekmm.ui.theme.Typography
 
 @Composable
 fun FilledButton(text: String, enabled: Boolean, onClick: (enabled: Boolean) -> Unit) {
-    val backgroundColor = if (enabled) Colors.colorSecondary else Colors.colorHint
+    val backgroundColor = if (enabled) Colors.colorSecondary else Colors.colorPrimaryVariant
     val textColor = if (enabled) Colors.colorPrimaryVariant else Colors.colorOnPrimary
     Button(
         onClick = {

@@ -1,6 +1,8 @@
 package com.makeevrserg.simplekmm.ui.presentation.localdb_files
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,12 +14,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.unit.coerceAtLeast
+import androidx.compose.ui.unit.coerceIn
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.simplekmm.modules.LocalDBApiModule
 import com.makeevrserg.simplekmm.ui.components.AstraBottomSheet
@@ -48,6 +50,16 @@ fun FilesScreen(navigation: AppScreenNavigation) {
     val coroutineScope = rememberCoroutineScope()
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    var scale by remember { mutableStateOf(1f) }
+
+    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
+
+        val zoom = if (zoomChange > 1) zoomChange  else zoomChange
+        println("Original: $zoomChange; new: $zoom")
+        scale *= zoom
+
+
+    }
 
     ModalBottomSheetLayout(
         sheetContent = {
@@ -67,8 +79,8 @@ fun FilesScreen(navigation: AppScreenNavigation) {
                         }
                     }
                 }
-                AstraButton(Modifier.fillMaxWidth(),text = "Apply", backgroundColor = Colors.colorSecondary) {
-                   viewModel.onRefreshClicked()
+                AstraButton(Modifier.fillMaxWidth(), text = "Apply", backgroundColor = Colors.colorSecondary) {
+                    viewModel.onRefreshClicked()
                 }
 
             }
@@ -77,7 +89,7 @@ fun FilesScreen(navigation: AppScreenNavigation) {
         sheetShape = RoundedCornerShape(topStart = Dimens.S, topEnd = Dimens.S),
         sheetState = modalBottomSheetState
     ) {
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().transformable(state)) {
             BackTopBar(navigation) {
                 IconButton(onClick = {
                     coroutineScope.launch {
@@ -89,19 +101,19 @@ fun FilesScreen(navigation: AppScreenNavigation) {
                     Icon(Icons.Filled.FilterList, "", tint = Colors.colorOnPrimary)
                 }
             }
+            val size  = (128.dp * scale).coerceIn(64.dp,512.dp)
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize().background(Colors.colorPrimaryVariant),
-                columns = GridCells.Adaptive(minSize = 128.dp),
+                columns = GridCells.Adaptive(size),
                 state = lazyGridState
             ) {
 
                 items(files) {
-                    FileDTOPreview(fileDTO = it) {
+                    FileDTOPreview(Modifier.size(size), fileDTO = it) {
                         it.id?.let { id ->
                             Injector.remember(it)
                             navigation.nextScreen(AppScreen.File(id))
                         }
-
                     }
                 }
             }
