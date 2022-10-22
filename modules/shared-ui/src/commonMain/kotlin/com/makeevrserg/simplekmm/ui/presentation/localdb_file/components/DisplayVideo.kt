@@ -2,10 +2,12 @@ package com.makeevrserg.simplekmm.ui.presentation.localdb_file.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,12 +33,15 @@ fun DisplayVideo(
     Box(Modifier.fillMaxSize().background(Colors.colorPrimaryVariant), contentAlignment = Alignment.Center) {
 
         when (videoState) {
-            PlayerState.Loading -> {
+            PlayerState.Preparing -> {
                 KMMImage(file.thumbnailUrl,
                     modifier = Modifier.fillMaxWidth().height(256.dp),
                     contentScale = ContentScale.Fit,
                     loadingIndicator = {
                         ShimmerItem(Modifier.fillMaxWidth().height(256.dp))
+                        Box(Modifier.fillMaxWidth().height(256.dp), contentAlignment = Alignment.Center) {
+                            CircularProgressIndicator(color = Colors.colorSecondary)
+                        }
                     },
                     errorIndicator = {
                         Box(Modifier.fillMaxWidth().height(256.dp), contentAlignment = Alignment.Center) {
@@ -49,9 +54,13 @@ fun DisplayVideo(
                         }
 
                     })
-//                ShimmerItem(Modifier.fillMaxWidth().height(256.dp))
             }
-            PlayerState.Paused, PlayerState.Playing -> KMMPlayer(player = player)
+
+            PlayerState.Paused, PlayerState.Playing, PlayerState.Buffering, PlayerState.Prepared -> {
+                KMMPlayer(player = player)
+                if (videoState is PlayerState.Buffering)
+                    CircularProgressIndicator(color = Colors.colorSecondary)
+            }
         }
         Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
             SliderElement(state.duration.toFloat(), state.currentPosition.toFloat(),

@@ -101,7 +101,7 @@ fun FilesScreen(navigation: AppScreenNavigation) {
                     Icon(Icons.Filled.FilterList, "", tint = Colors.colorOnPrimary)
                 }
             }
-            val size  = (128.dp * scale).coerceIn(64.dp,512.dp)
+            val size  = (128.dp * scale).coerceIn(64.dp,256.dp)
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize().background(Colors.colorPrimaryVariant),
                 columns = GridCells.Adaptive(size),

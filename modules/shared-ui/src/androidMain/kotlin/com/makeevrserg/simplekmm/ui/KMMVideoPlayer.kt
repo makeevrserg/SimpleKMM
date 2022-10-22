@@ -13,6 +13,7 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
     Player.Listener {
     private var isErrorNotificationSend = false
     private var progressJob: Job? = null
+    private var isDestroying = false
     private val mediaItem: MediaItem
         get() = MediaItem.fromUri(url)
     var player: Player? = null
@@ -25,8 +26,31 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
             isErrorNotificationSend = true
         }
 
-        destroyPlayer()
+        player?.stop()
+        player?.release()
+        player?.removeListener(this)
         initializePlayer()
+    }
+
+    override fun onPlaybackStateChanged(playbackState: Int) {
+        super.onPlaybackStateChanged(playbackState)
+        when (playbackState) {
+            Player.STATE_BUFFERING -> {
+                event.onStateChanged(PlayerState.Buffering)
+            }
+
+            Player.STATE_READY -> {
+                event.onStateChanged(PlayerState.Prepared)
+                player?.duration?.let {
+                    event.onDurationAccessible(it)
+                }
+
+            }
+
+            Player.STATE_IDLE -> {
+                event.onStateChanged(PlayerState.Paused)
+            }
+        }
     }
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -34,19 +58,13 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
         event.onStateChanged(if (isPlaying) PlayerState.Playing else return)
     }
 
-
-    override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-        if (playbackState == ExoPlayer.STATE_READY) {
-            val duration = player?.duration ?: return
-            event.onDurationAccessible(duration)
-        }
-    }
-
     actual fun seek(progress: Float) {
+        event.onStateChanged(PlayerState.Buffering)
         player?.seekTo(progress.toLong())
     }
 
     private fun initializePlayer() {
+        if (isDestroying) return
         player = ExoPlayer.Builder(AndroidContext.context)
             .build().also { player ->
                 player.setMediaItem(mediaItem)
@@ -54,6 +72,7 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
                 player.playWhenReady = true
                 player.addListener(this)
             }
+        player?.repeatMode = Player.REPEAT_MODE_ONE
         progressJob = MainScope().launch(Dispatchers.Unconfined) {
             while (this.isActive) {
                 delay(1000L)
@@ -65,6 +84,7 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
     }
 
     actual fun destroyPlayer() {
+        isDestroying = true
         progressJob?.cancel()
         player?.stop()
         player?.release()

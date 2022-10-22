@@ -33,7 +33,7 @@ class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : StateViewModel<Sc
         ).send()
     }
 
-    override val state = MutableStateFlow<ScreenState>(createScreenState())
+    override val state = MutableStateFlow<ScreenState>(ScreenState.Loading)
 
     fun onSeeking(progress: Float) = updateState<ScreenState.Video> {
         copy(isSeeking = true, currentPosition = progress.toLong())
@@ -61,14 +61,16 @@ class FileViewModel(val id: Int, val api: ILocalDatabaseAPI) : StateViewModel<Sc
     }
 
 
-    fun createScreenState(): ScreenState {
-        val file = Injector.get<FileDTO>()
-        return if (file.type == FileType.MP4 || file.type == FileType.WEBM) {
-            val player = KMMVideoPlayer(LocalDBRoutes.filePath(file.id ?: -1), this)
-            ScreenState.Video(file, player)
-        } else {
-            ScreenState.Image(file)
+    init {
+        val file = Injector.getAndDelete<FileDTO>()?.let { file ->
+            state.value = if (file.type == FileType.MP4 || file.type == FileType.WEBM) {
+                val player = KMMVideoPlayer(LocalDBRoutes.filePath(file.id ?: -1), this)
+                ScreenState.Video(file, player)
+            } else {
+                ScreenState.Image(file)
+            }
         }
+
 
     }
 

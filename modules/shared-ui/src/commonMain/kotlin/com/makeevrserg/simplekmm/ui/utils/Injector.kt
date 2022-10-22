@@ -10,4 +10,9 @@ object Injector {
     }
 
     inline fun <reified T : Any> get(): T = _remembered.first { it is T } as T
+    inline fun <reified T : Any> getAndDelete(): T? {
+        val value = _remembered.firstOrNull { it is T }
+        _remembered.remove(value)
+        return value as? T?
+    }
 }

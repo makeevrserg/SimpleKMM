@@ -15,7 +15,7 @@ class FilesViewModel(val api: ILocalDatabaseAPI) : BaseViewModel() {
     val collector = PagingCollector<FileDTO>(0, viewModelScope, onUpdated = {}, loader = { page ->
         api.getFiles(page, filter.value).data
     })
-    val filter = MutableStateFlow(ListFilter(fileTypes = listOf(FileType.MP4)))
+    val filter = MutableStateFlow(ListFilter(fileTypes = listOf(FileType.WEBM)))
 
     fun onRefreshClicked() = viewModelScope.launch(Dispatchers.IO) {
         collector.reset()
