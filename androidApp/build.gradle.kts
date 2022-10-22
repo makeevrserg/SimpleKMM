@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared-ui"))
+    implementation(project(":modules:shared-ui"))
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)

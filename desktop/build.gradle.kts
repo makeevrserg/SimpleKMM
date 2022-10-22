@@ -18,7 +18,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 // Compose
-                implementation(project(":shared-ui"))
+                implementation(project(":modules:shared-ui"))
                 implementation(compose.desktop.currentOs)
                 // Navigation
                 implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
