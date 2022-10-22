@@ -5,9 +5,9 @@ import com.arkivanov.essenty.parcelable.Parcelize
 
 
 sealed class AppScreen : Parcelable {
-    companion object{
+    companion object {
         val Initial: AppScreen
-            get() = Main
+            get() = Files
     }
 
     @Parcelize
@@ -15,6 +15,12 @@ sealed class AppScreen : Parcelable {
 
     @Parcelize
     object Characters : AppScreen()
+
+    @Parcelize
+    object Files : AppScreen()
+
+    @Parcelize
+    data class File(val id: Int) : AppScreen()
 
     @Parcelize
     data class Character(val id: Int) : AppScreen()

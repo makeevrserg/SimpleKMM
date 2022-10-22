@@ -39,8 +39,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:${Dependencies.Domain.ktor}")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:${Dependencies.Domain.ktor}")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${Dependencies.Kotlin.serializationJson}")
-                implementation(project(":modules:rick-morty"))
-                implementation(project(":modules:localdb-api"))
+                implementation(project(":modules:localdb-dto"))
             }
         }
         val commonTest by getting {
@@ -76,7 +75,7 @@ kotlin {
     }
 }
 android {
-    namespace = "com.makeevrserg.simplekmm.domain"
+    namespace = "com.makeevrserg.simplekmm.localdb_api"
     compileSdk = 33
     defaultConfig {
         minSdk = 21

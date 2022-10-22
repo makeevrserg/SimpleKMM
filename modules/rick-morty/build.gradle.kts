@@ -74,7 +74,7 @@ kotlin {
     }
 }
 android {
-    namespace = "com.makeevrserg.simplekmm"
+    namespace = "com.makeevrserg.simplekmm.rick_morty"
     compileSdk = 33
     defaultConfig {
         minSdk = 21

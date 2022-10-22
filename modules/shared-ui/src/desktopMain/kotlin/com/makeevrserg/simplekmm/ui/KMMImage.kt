@@ -2,7 +2,9 @@ package com.makeevrserg.simplekmm.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.layout.ContentScale
 import com.makeevrserg.simplekmm.modules.HttpClientModule
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -11,7 +13,9 @@ import io.ktor.client.request.*
 actual fun KMMImage(
     url: String,
     loadingIndicator: @Composable () -> Unit,
-    errorIndicator: @Composable () -> Unit
+    errorIndicator: @Composable () -> Unit,
+    modifier: Modifier,
+    contentScale: ContentScale
 ) {
     var bitmap by remember { mutableStateOf<ImageBitmap?>(null) }
     var isLoaded by remember { mutableStateOf(false) }
@@ -30,6 +34,8 @@ actual fun KMMImage(
             Image(
                 bitmap,
                 "contentDescription",
+                modifier = modifier,
+                contentScale = contentScale
             )
         else errorIndicator()
     }

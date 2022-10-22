@@ -14,6 +14,8 @@ import com.makeevrserg.simplekmm.ui.navigation.wrapper.DecomposeNavigation
 import com.makeevrserg.simplekmm.ui.presentation.character.CharacterScreen
 import com.makeevrserg.simplekmm.ui.presentation.characters.CharactersScreen
 import com.makeevrserg.simplekmm.ui.presentation.choose_screen.ChooseScreen
+import com.makeevrserg.simplekmm.ui.presentation.localdb_file.FileScreen
+import com.makeevrserg.simplekmm.ui.presentation.localdb_files.FilesScreen
 
 /**
  * Navigator
@@ -48,6 +50,14 @@ class NavHostComponent(
 
             is AppScreen.Character -> Component.composeComponent {
                 CharacterScreen(screenConfig.id, decomposeNavigation)
+            }
+
+            is AppScreen.Files -> Component.composeComponent {
+                FilesScreen(decomposeNavigation)
+            }
+
+            is AppScreen.File -> Component.composeComponent {
+                FileScreen(screenConfig.id, decomposeNavigation)
             }
         }
     }

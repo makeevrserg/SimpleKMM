@@ -7,11 +7,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-object HttpRoutes {
-    private const val BASE_URL = "https://rickandmortyapi.com/api/"
-    const val CHARACTERS = "${BASE_URL}character"
-    fun Character(id: Int) = "${BASE_URL}character/$id"
-}
+
 
 class RickAndMortyAPI(private val client: HttpClient) {
 
@@ -19,11 +15,11 @@ class RickAndMortyAPI(private val client: HttpClient) {
         contentType(ContentType.Application.Json)
         parameter("page", page)
         parameter("size", size)
-        url(HttpRoutes.CHARACTERS)
+        url(RMRoutes.CHARACTERS)
     }.body()
 
     suspend fun fetchCharacter(id: Int): Result = client.get {
         contentType(ContentType.Application.Json)
-        url(HttpRoutes.Character(id))
+        url(RMRoutes.Character(id))
     }.body()
 }

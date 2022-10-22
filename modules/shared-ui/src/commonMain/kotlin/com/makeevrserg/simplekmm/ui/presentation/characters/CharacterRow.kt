@@ -1,6 +1,5 @@
 package com.makeevrserg.simplekmm.ui.presentation.characters
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
@@ -42,7 +41,6 @@ fun CharacterRow(character: Result, onItemClick: () -> Unit) {
 
 
 @Composable
-@Preview
 fun Preview() {
     Surface(Modifier.width(200.dp).height(300.dp).background(Colors.colorPrimaryVariant)) {
         CharacterRow(

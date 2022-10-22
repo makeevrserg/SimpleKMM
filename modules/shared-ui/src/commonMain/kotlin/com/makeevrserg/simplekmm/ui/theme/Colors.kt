@@ -11,9 +11,13 @@ object Colors {
     val colorOnPrimary: Color = Color(0xFF000000)
     val colorSecondary: Color = Color(0xFF01A8E5)
     val colorSecondaryVariant: Color = Color(0xFFE56E01)
+    val colorShimmer:Color = Color(0xFF151E27)
     val colorNegative: Color
         get() = Color(0xFFF82A2A)
-
+    val videoColor:Color
+        get() = Color(0xFF379AFF)
+    val imageColor:Color
+        get() = Color(0xFF866AEF)
     val Transparent: Color
         get() = Color(0x00000000)
 }

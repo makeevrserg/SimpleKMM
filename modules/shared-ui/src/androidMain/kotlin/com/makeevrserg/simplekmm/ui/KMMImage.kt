@@ -14,7 +14,9 @@ import io.ktor.client.request.*
 actual fun KMMImage(
     url: String,
     loadingIndicator: @Composable () -> Unit,
-    errorIndicator: @Composable () -> Unit
+    errorIndicator: @Composable () -> Unit,
+    modifier:Modifier ,
+    contentScale: ContentScale
 ) {
     var state by remember { mutableStateOf<AsyncImagePainter.State>(AsyncImagePainter.State.Loading(null)) }
     if (state is AsyncImagePainter.State.Error)
@@ -24,12 +26,10 @@ actual fun KMMImage(
     AsyncImage(
         model = url,
         contentDescription = null,
+        modifier = modifier,
+        contentScale = contentScale,
         onState = {
-            when (it) {
-                is AsyncImagePainter.State.Error -> state = it
-                is AsyncImagePainter.State.Loading -> state = it
-                else -> state = it
-            }
+            state = it
         }
     )
 }

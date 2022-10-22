@@ -59,7 +59,7 @@ kotlin {
     }
 }
 android {
-    namespace = "com.makeevrserg.simplekmm"
+    namespace = "com.makeevrserg.simplekmm.localdb_dto"
     compileSdk = 33
     defaultConfig {
         minSdk = 21

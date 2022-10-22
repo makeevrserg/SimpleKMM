@@ -31,6 +31,9 @@ fun ChooseScreen(navigation: AppScreenNavigation) {
             AstraButton(text = "RickAndMorty") {
                 navigation.nextScreen(AppScreen.Characters)
             }
+            AstraButton(text = "FilesList") {
+                navigation.nextScreen(AppScreen.Files)
+            }
         }
     }
 }
