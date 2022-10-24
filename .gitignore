@@ -12,3 +12,5 @@ androidApp/build
 desktop/build
 domain/build
 shared/build
+androidApp/keystore.jks
+keys.properties

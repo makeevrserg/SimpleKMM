@@ -13,7 +13,7 @@ import ru.astrainteractive.astralearner.dto.ListFilter
 
 class FilesViewModel(val api: ILocalDatabaseAPI) : BaseViewModel() {
     val collector = PagingCollector<FileDTO>(0, viewModelScope, onUpdated = {}, loader = { page ->
-        api.getFiles(page, filter.value).data
+        api.getFiles(page, filter.value)?.data
     })
     val filter = MutableStateFlow(ListFilter(fileTypes = listOf(FileType.WEBM)))
 

@@ -6,5 +6,5 @@ import ru.astrainteractive.astralearner.response.PagingResponse
 
 interface ILocalDatabaseAPI {
 
-    suspend fun getFiles(page: Int, filter: ListFilter): PagingResponse<FileDTO>
+    suspend fun getFiles(page: Int, filter: ListFilter): PagingResponse<FileDTO>?
 }

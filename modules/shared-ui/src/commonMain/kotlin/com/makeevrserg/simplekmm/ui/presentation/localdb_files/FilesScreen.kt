@@ -25,6 +25,7 @@ import com.makeevrserg.simplekmm.modules.LocalDBApiModule
 import com.makeevrserg.simplekmm.ui.components.AstraBottomSheet
 import com.makeevrserg.simplekmm.ui.components.AstraButton
 import com.makeevrserg.simplekmm.ui.components.BackTopBar
+import com.makeevrserg.simplekmm.ui.components.ShimmerItem
 import com.makeevrserg.simplekmm.ui.navigation.AppScreen
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Colors
@@ -90,24 +91,23 @@ fun FilesScreen(navigation: AppScreenNavigation) {
         sheetState = modalBottomSheetState
     ) {
         Column(Modifier.fillMaxSize().transformable(state)) {
-            BackTopBar(navigation) {
-                IconButton(onClick = {
-                    coroutineScope.launch {
-                        if (modalBottomSheetState.isVisible)
-                            modalBottomSheetState.hide()
-                        else modalBottomSheetState.show()
-                    }
-                }) {
-                    Icon(Icons.Filled.FilterList, "", tint = Colors.colorOnPrimary)
-                }
-            }
+//            BackTopBar(navigation) {
+//                IconButton(onClick = {
+//                    coroutineScope.launch {
+//                        if (modalBottomSheetState.isVisible)
+//                            modalBottomSheetState.hide()
+//                        else modalBottomSheetState.show()
+//                    }
+//                }) {
+//                    Icon(Icons.Filled.FilterList, "", tint = Colors.colorOnPrimary)
+//                }
+//            }
             val size  = (128.dp * scale).coerceIn(64.dp,256.dp)
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize().background(Colors.colorPrimaryVariant),
                 columns = GridCells.Adaptive(size),
                 state = lazyGridState
             ) {
-
                 items(files) {
                     FileDTOPreview(Modifier.size(size), fileDTO = it) {
                         it.id?.let { id ->
