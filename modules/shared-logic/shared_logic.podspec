@@ -6,14 +6,14 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for the Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/shared_logic.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':modules:shared-logic',
-        'PRODUCT_MODULE_NAME' => 'shared',
+        'PRODUCT_MODULE_NAME' => 'shared_logic',
     }
                 
     spec.script_phases = [

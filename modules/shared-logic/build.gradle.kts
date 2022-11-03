@@ -21,9 +21,9 @@ kotlin {
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../iosApp/Podfile")
+        podfile = project.file("../../iosApp/Podfile")
         framework {
-            baseName = "shared"
+            baseName = "shared_logic"
         }
     }
     sourceSets {
