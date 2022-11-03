@@ -65,7 +65,7 @@ actual class KMMVideoPlayer actual constructor(actual val url: String, actual va
 
     private fun initializePlayer() {
         if (isDestroying) return
-        player = ExoPlayer.Builder(AndroidContext.context)
+        player = ExoPlayer.Builder(LateinitContext.value)
             .build().also { player ->
                 player.setMediaItem(mediaItem)
                 player.prepare()

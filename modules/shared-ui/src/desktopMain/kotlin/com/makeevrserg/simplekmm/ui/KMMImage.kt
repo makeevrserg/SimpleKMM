@@ -5,7 +5,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
-import com.makeevrserg.simplekmm.modules.HttpClientModule
+import com.makeevrserg.simplekmm.ui.modules.HttpClientModule
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 

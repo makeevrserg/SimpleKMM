@@ -5,12 +5,8 @@ plugins {
     kotlin("android")
     id("org.jetbrains.compose")
 }
-fun getCredential(path: String): String? {
-    val properties: java.util.Properties = Properties()
-    val inputStream: java.io.InputStream = project.rootProject.file("keys.properties").inputStream()
-    properties.load(inputStream)
-    return properties.getProperty(path)
-}
+
+
 android {
     namespace = "com.makeevrserg.simplekmm.android"
     compileSdk = 33
@@ -32,30 +28,16 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    signingConfigs {
-        getByName("debug") {
-            keyAlias = getCredential("KEY_ALIAS")
-            keyPassword = getCredential("KEY_PASSWORD")
-            storeFile = file("keystore.jks")
-            storePassword = getCredential("STORE_PASSWORD")
-        }
-        create("release") {
-            keyAlias = getCredential("KEY_ALIAS")
-            keyPassword = getCredential("KEY_PASSWORD")
-            storeFile = file("keystore.jks")
-            storePassword = getCredential("STORE_PASSWORD")
-        }
-    }
     buildTypes {
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
 
 dependencies {
     implementation(project(":modules:shared-ui"))
+    implementation(project(":modules:shared-logic"))
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)

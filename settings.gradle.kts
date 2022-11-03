@@ -22,10 +22,9 @@ dependencyResolutionManagement {
 rootProject.name = "SimpleKMM"
 include(":androidApp")
 include(":desktop")
-include(":shared")
 include(":modules")
 include(":modules:localdb-dto")
 include(":modules:rick-morty")
 include(":modules:localdb-api")
-include(":modules:domain")
 include(":modules:shared-ui")
+include(":modules:shared-logic")

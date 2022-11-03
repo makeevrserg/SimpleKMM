@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.makeevrserg.simplekmm.modules.RickAndMortyApiModule
+import com.makeevrserg.simplekmm.ui.modules.RickAndMortyApiModule
 import com.makeevrserg.simplekmm.ui.components.BackTopBar
 import com.makeevrserg.simplekmm.ui.navigation.AppScreen
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation

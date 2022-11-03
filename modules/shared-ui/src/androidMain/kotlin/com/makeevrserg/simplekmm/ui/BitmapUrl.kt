@@ -8,9 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.lifecycle.LifecycleOwner
-import com.makeevrserg.simplekmm.modules.HttpClientModule
+import com.makeevrserg.simplekmm.ui.modules.HttpClientModule
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 

@@ -25,7 +25,7 @@ actual fun KMMPlayer(modifier: Modifier, player: KMMVideoPlayer) {
     }
     AndroidView(
         factory = {
-            StyledPlayerView(AndroidContext.context).also {
+            StyledPlayerView(LateinitContext.value).also {
                 it.player = player.player
                 it.hideController()
                 it.useController = false

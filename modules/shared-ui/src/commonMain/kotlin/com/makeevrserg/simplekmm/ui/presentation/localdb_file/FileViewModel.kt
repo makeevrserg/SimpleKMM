@@ -6,9 +6,9 @@ import com.makeevrserg.simplekmm.ui.*
 import com.makeevrserg.simplekmm.ui.core.StateViewModel
 import com.makeevrserg.simplekmm.ui.player.IPlayerEvent
 import com.makeevrserg.simplekmm.ui.player.PlayerState
-import com.makeevrserg.simplekmm.ui.ui.IUIDialogAction
-import com.makeevrserg.simplekmm.ui.ui.UIDialogButton
-import com.makeevrserg.simplekmm.ui.ui.UIDialogMessage
+import com.makeevrserg.simplekmm.ui.core.dialog.IUIDialogAction
+import com.makeevrserg.simplekmm.ui.core.dialog.UIDialogButton
+import com.makeevrserg.simplekmm.ui.core.dialog.UIDialogMessage
 import com.makeevrserg.simplekmm.ui.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.astrainteractive.astralearner.dto.FileDTO

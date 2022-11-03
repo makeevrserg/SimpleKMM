@@ -25,7 +25,6 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.preview)
                 implementation(compose.uiTooling)
-                implementation(project(":modules:domain"))
                 implementation(project(":modules:rick-morty"))
                 implementation(project(":modules:localdb-dto"))
                 implementation(project(":modules:localdb-api"))
@@ -35,6 +34,7 @@ kotlin {
                 // Navigation
                 implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
                 implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}")
+                implementation(project(":modules:shared-logic"))
 
             }
         }

@@ -16,9 +16,6 @@ import com.makeevrserg.simplekmm.ui.theme.Typography
 
 @Composable
 fun ChooseScreen(navigation: AppScreenNavigation) {
-    val viewModel = navigation.viewModelFactory(ChooseScreenViewModel::class.java) {
-        ChooseScreenViewModel()
-    }
     Scaffold(
         backgroundColor = Colors.colorPrimaryVariant
     ) {

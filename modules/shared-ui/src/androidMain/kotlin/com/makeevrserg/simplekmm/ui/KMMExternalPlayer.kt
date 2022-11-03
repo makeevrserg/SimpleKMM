@@ -10,6 +10,6 @@ actual class KMMExternalPlayer actual constructor(actual val url: String) {
         intent.setDataAndType(Uri.parse(url), "video/*")
         println("Asking to play url: $url")
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        AndroidContext.activity.startActivity(Intent.createChooser(intent, "Complete action using"))
+        LateinitActivity.value.startActivity(Intent.createChooser(intent, "Complete action using"))
     }
 }

@@ -6,7 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import com.makeevrserg.simplekmm.ui.theme.Typography
-import com.makeevrserg.simplekmm.ui.ui.UIDialogMessage
+import com.makeevrserg.simplekmm.ui.core.dialog.UIDialogMessage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
