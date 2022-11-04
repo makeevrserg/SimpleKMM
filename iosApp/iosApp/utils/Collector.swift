@@ -3,7 +3,9 @@ import shared_logic
 class Collector<T>: shared_logic.Kotlinx_coroutines_coreFlowCollector {
     
     func emit(value: Any?, completionHandler: @escaping (Error?) -> Void) {
-        callback(value as! T)
+        DispatchQueue.main.async {
+            self.callback(value as! T)
+        }
         completionHandler(nil)
     }
     

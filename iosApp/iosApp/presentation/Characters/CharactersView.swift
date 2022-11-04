@@ -14,7 +14,9 @@ struct CharactersView: View {
         if (list == nil || list?.isEmpty == true){
             
         } else {
-            ListView(list: list!)
+            ListView(list: list!){
+                observableState.onEndReached()
+            }
         }
         
     }
