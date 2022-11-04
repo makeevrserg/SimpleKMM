@@ -1,5 +1,3 @@
-import org.jetbrains.compose.compose
-
 plugins {
     kotlin("plugin.serialization")
     kotlin("multiplatform")
@@ -42,11 +40,7 @@ kotlin {
                 implementation(project(":modules:localdb-dto"))
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
+        val commonTest by getting
 
         val desktopMain by getting
         val androidMain by getting
