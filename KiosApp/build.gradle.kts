@@ -31,6 +31,7 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.runtime)
                 implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                implementation(project(":modules:shared-ui"))
             }
         }
         val uikitX64Main by getting {

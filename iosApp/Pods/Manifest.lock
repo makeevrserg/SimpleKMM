@@ -1,14 +1,20 @@
 PODS:
+  - Kingfisher (7.4.1)
   - localdb_api (1.0)
   - localdb_dto (1.0)
   - rick_morty (1.0)
   - shared_logic (1.0)
 
 DEPENDENCIES:
+  - Kingfisher (~> 7.0)
   - localdb_api (from `../modules/localdb-api`)
   - localdb_dto (from `../modules/localdb-dto`)
   - rick_morty (from `../modules/rick-morty`)
   - shared_logic (from `../modules/shared-logic`)
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
 
 EXTERNAL SOURCES:
   localdb_api:
@@ -21,11 +27,12 @@ EXTERNAL SOURCES:
     :path: "../modules/shared-logic"
 
 SPEC CHECKSUMS:
+  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   localdb_api: d2e3d58ebf76a420af2b0b5b20328416b9ad246d
   localdb_dto: 3997971fafb569235346b4b0e974c7099105a0d2
   rick_morty: c1d3df3e79943971297ff12b42aaaf2c83ec7b94
   shared_logic: 0eefc1da32b86412625516200d9e23dc6d67f1af
 
-PODFILE CHECKSUM: a8a21bc64b29eead241e471f1decaf1cac700c68
+PODFILE CHECKSUM: 129f93e23b3db6ce767a69e43428ef6f45446cca
 
 COCOAPODS: 1.11.3
