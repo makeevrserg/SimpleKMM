@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 import localdb_dto
 import localdb_api
 import shared_logic
@@ -40,10 +41,18 @@ struct ContentView: View {
     @StateObject private var observableState = ObservableState()
     
     var body: some View {
-        let desc = observableState.data?.description
-        if (desc==nil){
-        Text("Null")}
-        else {Text(desc!)}
+        let list: [shared_logic.Rick_mortyResult]? = observableState.data
+        if (list == nil || list?.isEmpty == true){
+            
+        } else {
+            List(list!,id: \.self) {character in
+            HStack {
+                KFImage(URL(string: character.image)!).resizable().aspectRatio(contentMode: .fit).frame(width: 48,height: 48)
+                Text(character.name)
+            }
+        }
+        }
+        
 	}
 }
 

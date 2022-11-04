@@ -1,6 +1,7 @@
 target 'iosApp' do
   use_frameworks!
   platform :ios, '14.1'
+  pod 'Kingfisher', '~> 7.0'
   pod 'localdb_api', :path => '../modules/localdb-api'
   pod 'localdb_dto', :path => '../modules/localdb-dto'
   pod 'rick_morty', :path => '../modules/rick-morty'
