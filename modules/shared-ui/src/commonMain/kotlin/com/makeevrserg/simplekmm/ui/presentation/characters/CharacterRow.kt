@@ -1,6 +1,7 @@
 package com.makeevrserg.simplekmm.ui.presentation.characters
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -28,7 +29,7 @@ fun RowInfo(
 @Composable
 fun CharacterRow(character: Result, onItemClick: () -> Unit) {
     DashedCard {
-        Box(Modifier, contentAlignment = Alignment.Center) {
+        Box(Modifier.clickable { onItemClick() }, contentAlignment = Alignment.Center) {
             Box(Modifier.size(64.dp).background(Colors.colorSecondary)) {
                 KMMImage(character.image, {}, {})
             }

@@ -17,6 +17,7 @@
 		A880661129159674000016CE /* CharactersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A880661029159674000016CE /* CharactersView.swift */; };
 		A880661429159923000016CE /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A880661329159923000016CE /* ListView.swift */; };
 		A880661629159935000016CE /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A880661529159935000016CE /* CharacterView.swift */; };
+		A8CFB7C1291D228D007032E9 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CFB7C0291D228D007032E9 /* TypeAliases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A880661029159674000016CE /* CharactersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersView.swift; sourceTree = "<group>"; };
 		A880661329159923000016CE /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A880661529159935000016CE /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		A8CFB7C0291D228D007032E9 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		CF5D0326C404B0680FB122FF /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				A880660A29159618000016CE /* Collector.swift */,
+				A8CFB7C0291D228D007032E9 /* TypeAliases.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				A880661129159674000016CE /* CharactersView.swift in Sources */,
 				A880661429159923000016CE /* ListView.swift in Sources */,
 				A880660B29159618000016CE /* Collector.swift in Sources */,
+				A8CFB7C1291D228D007032E9 /* TypeAliases.swift in Sources */,
 				A880660F29159666000016CE /* CharactersState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

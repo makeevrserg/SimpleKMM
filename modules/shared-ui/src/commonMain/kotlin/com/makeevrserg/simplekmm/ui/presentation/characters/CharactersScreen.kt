@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,14 +16,18 @@ import com.makeevrserg.simplekmm.ui.navigation.AppScreen
 import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Colors
 import com.makeevrserg.simplekmm.ui.theme.Typography
+import com.makeevrserg.simplekmm.ui.utils.collect
 
 @Composable
 fun CharactersScreen(navigation: AppScreenNavigation) {
     val viewModel: CharacterListViewModel = navigation.viewModelFactory(CharacterListViewModel::class.java) {
         CharacterListViewModel(RickAndMortyApiModule.value)
     }
+    val lazyColumnState = rememberLazyListState()
+    viewModel.paging.collect(lazyColumnState)
+
     val list by viewModel.characterList.collectAsState()
-    LazyColumn(Modifier.fillMaxSize().background(Colors.colorPrimaryVariant)) {
+    LazyColumn(Modifier.fillMaxSize().background(Colors.colorPrimaryVariant), state = lazyColumnState) {
         item {
             BackTopBar(navigation)
         }

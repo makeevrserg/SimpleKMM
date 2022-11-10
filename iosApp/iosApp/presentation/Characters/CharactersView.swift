@@ -12,7 +12,7 @@ struct CharactersView: View {
     var body: some View {
         let list: [shared_logic.Rick_mortyResult]? = observableState.data
         if (list == nil || list?.isEmpty == true){
-            
+            Text("Loading")
         } else {
             ListView(list: list!){
                 observableState.onEndReached()

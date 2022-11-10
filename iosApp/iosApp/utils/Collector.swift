@@ -1,6 +1,9 @@
 import Foundation
 import shared_logic
-class Collector<T>: shared_logic.Kotlinx_coroutines_coreFlowCollector {
+
+
+
+class Collector<T>: FlowColletor {
     
     func emit(value: Any?, completionHandler: @escaping (Error?) -> Void) {
         DispatchQueue.main.async {

@@ -10,7 +10,11 @@ struct CharacterView: View{
     var body: some View{
         HStack {
             KFImage(URL(string: character.image)!).resizable().aspectRatio(contentMode: .fit).frame(width: 48,height: 48)
-            Text(character.name)
+            VStack(alignment: .leading){
+                Text("Name: \(character.name)")
+                Text("Species: \(character.species)")
+                Text("Status: \(character.status)")
+            }
         }
     }
 }

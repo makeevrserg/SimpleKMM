@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class CharacterListViewModel(val api: RickAndMortyAPI) : BaseViewModel() {
-    val paging = PagingCollector(0, viewModelScope, {}) {
+    val paging = PagingCollector(1, viewModelScope, {}) {
         api.fetchCharacters(it, 10).results
     }
     val characterList: StateFlow<List<Result>>
