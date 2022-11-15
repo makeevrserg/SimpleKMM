@@ -1,15 +1,24 @@
-# **SimpleKMM project - 13.09.2022 edition**
-KMM starter project
-### **Purpose**
-- [x] Get basic knowledge of KMM in android, ios and desktop.
-- [ ] Understand how MVVM works in KMM project
-- [ ] Implement API with all basic operations
-- [ ] Implement shared resources instead of Material icons
+# SimpleKMM
+<p align="center">
+    SimpleKMM is the Kotlin Multiplatform application of IOS,JS and JVM example with shared logic
+</p>
 
-### **Description**
-Application connects Rick And Morty API and allows to browse it
-- [ ] Browse in android
-- [ ] Browse in Desktop
-- [ ] Browse in IOS
+### **Platforms**
+- [x] IOS - shared logic; native UI
+- [x] JS - shared logic; compose for web as UI
+- [x] JVM/Android - shared logic and UI
 
-
+## Directory structure
+    
+    ├── androidAPp          # Mobile app
+    ├── buildSrc            # Build components
+    ├── desktop             # Desktop app
+    ├── iosApp              # IOS native swiftUI app
+    ├── js                  # js Compose For Web app
+    ├── KiosAPp             # Kotlin Compose IOS app
+    ├── modules
+    │   ├── localdb-api     # API for local database
+    │   ├── localdb-dto     # DTO of local database
+    │   ├── rick-morty      # Rick And Morty public api
+    │   ├── shared-logic    # Shared logic - viewModels, paging
+    │   └── shared-ui       # Shared UI for desktop and android
