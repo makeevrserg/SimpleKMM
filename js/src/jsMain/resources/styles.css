@@ -1,0 +1,10 @@
+#root {
+    width: 100%;
+    height: 100vh;
+    background-color: red;
+    background: red;
+}
+
+#root > .compose-web-column > div {
+    position: relative;
+}

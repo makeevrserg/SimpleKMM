@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform").version("1.7.10").apply(false)
     kotlin("plugin.serialization").version("1.7.10").apply(false)
     id("org.jetbrains.compose").version("1.2.0-alpha01-dev774").apply(false)
+    kotlin("js") version "1.7.10" apply false
 }
 repositories {
     google()
@@ -25,6 +26,6 @@ allprojects {
         maven("https://jitpack.io")
     }
 }
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
+//tasks.register("clean", Delete::class) {
+//    delete(rootProject.buildDir)
+//}
