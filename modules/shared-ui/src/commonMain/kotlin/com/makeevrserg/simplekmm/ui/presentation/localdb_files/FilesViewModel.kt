@@ -17,7 +17,7 @@ class FilesViewModel(val api: ILocalDatabaseAPI) : BaseViewModel() {
     })
     val filter = MutableStateFlow(ListFilter(fileTypes = listOf(FileType.WEBM)))
 
-    fun onRefreshClicked() = viewModelScope.launch(Dispatchers.IO) {
+    fun onRefreshClicked() = viewModelScope.launch(Dispatchers.Unconfined) {
         collector.reset()
         collector.loadNextPage()
     }
@@ -33,6 +33,6 @@ class FilesViewModel(val api: ILocalDatabaseAPI) : BaseViewModel() {
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) { collector.reset() }
+        viewModelScope.launch(Dispatchers.Unconfined) { collector.reset() }
     }
 }

@@ -14,11 +14,12 @@ import com.makeevrserg.simplekmm.ui.KMMExternalPlayer
 import com.makeevrserg.simplekmm.ui.components.UiDialogMessage
 import com.makeevrserg.simplekmm.ui.presentation.localdb_file.components.DisplayImage
 import com.makeevrserg.simplekmm.ui.presentation.localdb_file.components.DisplayVideo
+import com.makeevrserg.simplekmm.ui.utils.viewModelFactory
 
 
 @Composable
 fun FileScreen(id: Int, navigation: AppScreenNavigation) {
-    val viewModel = navigation.viewModelFactory(FileViewModel::class.java) {
+    val viewModel = navigation.viewModelFactory() {
         println("MY_TAG: Creating FileViewModel")
         FileViewModel(id, LocalDBApiModule.value)
     }

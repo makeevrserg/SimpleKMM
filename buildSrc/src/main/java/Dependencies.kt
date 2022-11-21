@@ -70,6 +70,7 @@ object Dependencies {
     }
 
     object Compose {
+        const val jetbrainsCompose = "1.2.0"
         const val compose = "1.3.0"
         const val composeUI = "1.2.1"
         const val composeFoundation = "1.2.1"

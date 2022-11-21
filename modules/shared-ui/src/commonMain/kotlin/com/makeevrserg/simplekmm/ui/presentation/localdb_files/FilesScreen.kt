@@ -25,13 +25,14 @@ import com.makeevrserg.simplekmm.ui.theme.Dimens
 import com.makeevrserg.simplekmm.ui.theme.Typography
 import com.makeevrserg.simplekmm.ui.utils.Injector
 import com.makeevrserg.simplekmm.ui.utils.collect
+import com.makeevrserg.simplekmm.ui.utils.viewModelFactory
 import ru.astrainteractive.astralearner.dto.FileType
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FilesScreen(navigation: AppScreenNavigation) {
-    val viewModel = navigation.viewModelFactory(FilesViewModel::class.java) {
+    val viewModel = navigation.viewModelFactory() {
         FilesViewModel(LocalDBApiModule.value)
     }
     val files by viewModel.collector.list.collectAsState()

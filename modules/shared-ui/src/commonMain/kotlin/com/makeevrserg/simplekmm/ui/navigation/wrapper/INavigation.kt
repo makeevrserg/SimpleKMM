@@ -8,7 +8,6 @@ import com.makeevrserg.simplekmm.ui.core.BaseViewModel
 interface INavigation<T> {
     fun <K : T> nextScreen(screen: K)
     fun pop()
-    fun <T : BaseViewModel> viewModelFactory(clazz: Class<T>, viewModel: () -> T): T
 }
 
 

@@ -9,8 +9,8 @@ import com.makeevrserg.simplekmm.ui.core.BaseViewModel
 import com.makeevrserg.simplekmm.ui.navigation.AppScreen
 
 class DecomposeNavigation(
-    private val componentContext: ComponentContext,
-    private val navigation: StackNavigation<AppScreen>
+    val componentContext: ComponentContext,
+    val navigation: StackNavigation<AppScreen>
 ) : AppScreenNavigation {
     override fun <K : AppScreen> nextScreen(screen: K) {
         navigation.push(screen)
@@ -30,9 +30,4 @@ class DecomposeNavigation(
         return instance
     }
 
-    override fun <T : BaseViewModel> viewModelFactory(clazz: Class<T>, viewModel: () -> T): T {
-        return componentContext.instanceKeeper.getOrCreate(clazz) {
-            viewModel()
-        }
-    }
 }

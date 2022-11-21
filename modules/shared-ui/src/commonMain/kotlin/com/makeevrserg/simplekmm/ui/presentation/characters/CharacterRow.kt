@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.simplekmm.ui.KMMImage
 import com.makeevrserg.simplekmm.ui.components.DashedCard
@@ -31,7 +32,7 @@ fun CharacterRow(character: Result, onItemClick: () -> Unit) {
     DashedCard {
         Box(Modifier.clickable { onItemClick() }, contentAlignment = Alignment.Center) {
             Box(Modifier.size(64.dp).background(Colors.colorSecondary)) {
-                KMMImage(character.image, {}, {})
+                KMMImage(character.image, {}, {},Modifier, ContentScale.Fit)
             }
         }
         RowInfo("Gender", character.gender ?: "")

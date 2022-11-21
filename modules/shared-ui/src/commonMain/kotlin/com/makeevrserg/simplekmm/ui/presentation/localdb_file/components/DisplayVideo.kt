@@ -57,7 +57,7 @@ fun DisplayVideo(
             }
 
             PlayerState.Paused, PlayerState.Playing, PlayerState.Buffering, PlayerState.Prepared -> {
-                KMMPlayer(player = player)
+                KMMPlayer(Modifier,player = player,)
                 if (videoState is PlayerState.Buffering)
                     CircularProgressIndicator(color = Colors.colorSecondary)
             }

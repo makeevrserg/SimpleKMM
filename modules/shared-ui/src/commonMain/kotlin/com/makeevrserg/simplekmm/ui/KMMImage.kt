@@ -9,6 +9,6 @@ expect fun KMMImage(
     url: String,
     loadingIndicator: @Composable () -> Unit ,
     errorIndicator: @Composable () -> Unit,
-    modifier:Modifier = Modifier,
-    contentScale: ContentScale = ContentScale.Fit
+    modifier:Modifier,
+    contentScale: ContentScale
 )

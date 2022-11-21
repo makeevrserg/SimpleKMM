@@ -22,7 +22,7 @@ fun LazyGridState.isScrolledToTheEnd(): Boolean {
 @Composable
 fun <T> PagingCollector<T>.collect(state: LazyListState) {
     if (state.isScrolledToTheEnd())
-        coroutineScope.launch(Dispatchers.IO) {
+        coroutineScope.launch(Dispatchers.Unconfined) {
 
             loadNextPage()
         }
@@ -32,7 +32,7 @@ fun <T> PagingCollector<T>.collect(state: LazyListState) {
 @Composable
 fun <T> PagingCollector<T>.collect(state: LazyGridState) {
     if (state.isScrolledToTheEnd())
-        coroutineScope.launch(Dispatchers.IO) {
+        coroutineScope.launch(Dispatchers.Unconfined) {
 
             loadNextPage()
         }

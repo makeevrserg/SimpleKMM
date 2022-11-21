@@ -1,11 +1,11 @@
 plugins {
     //trick: for the same plugin versions in all submodules
-    id("com.android.application").version("7.2.0").apply(false) // 7.4.0-alpha10
-    id("com.android.library").version("7.2.0").apply(false) // 7.4.0-alpha10
-    kotlin("android").version("1.7.10").apply(false)
-    kotlin("multiplatform").version("1.7.10").apply(false)
-    kotlin("plugin.serialization").version("1.7.10").apply(false)
-    id("org.jetbrains.compose").version("1.2.0-alpha01-dev774").apply(false)
+    id("com.android.application").version(Dependencies.Android.application).apply(false) // 7.4.0-alpha10
+    id("com.android.library").version(Dependencies.Android.application).apply(false) // 7.4.0-alpha10
+    kotlin("android").version(Dependencies.Kotlin.version).apply(false)
+    kotlin("multiplatform").version(Dependencies.Kotlin.version).apply(false)
+    kotlin("plugin.serialization").version(Dependencies.Kotlin.version).apply(false)
+    id("org.jetbrains.compose").version(Dependencies.Compose.jetbrainsCompose).apply(false)
 }
 repositories {
     google()

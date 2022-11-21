@@ -7,7 +7,13 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-version = "1.0.0"
+version = Dependencies.version
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    google()
+}
 
 kotlin {
     listOf(iosX64("uikitX64"), iosArm64("uikitArm64")).forEach {
@@ -29,28 +35,33 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material)
+                implementation(compose.materialIconsExtended)
                 implementation(compose.runtime)
                 implementation ("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:${Dependencies.Kotlin.decompose}-native-compose")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                implementation("io.ktor:ktor-client-core:${Dependencies.Domain.ktor}")
+
+                implementation(project(":modules:rick-morty"))
+                implementation(project(":modules:localdb-dto"))
+                implementation(project(":modules:localdb-api"))
                 implementation(project(":modules:shared-ui"))
             }
         }
         val uikitX64Main by getting {
             dependsOn(uikitMain)
-            dependencies {
-            }
         }
         val uikitArm64Main by getting {
             dependsOn(uikitMain)
-            dependencies {
-            }
         }
     }
 }
 
 compose.experimental {
     uikit.application {
-        bundleIdPrefix = "com.makeevrserg"
-        projectName = "SlackComposeClone"
+        bundleIdPrefix = "com.makeevrserg.simplekmm"
+        projectName = "SimpleKMM"
         deployConfigurations {
             simulator("IPhone13Pro") {
                 // Usage: ./gradlew iosDeployIPhone8Debug

@@ -4,5 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-expect fun KMMPlayer(modifier: Modifier, player: KMMVideoPlayer)
-
+actual fun KMMPlayer(
+    modifier: Modifier,
+    player: KMMVideoPlayer
+) {
+}

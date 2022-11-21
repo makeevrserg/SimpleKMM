@@ -17,10 +17,11 @@ import com.makeevrserg.simplekmm.ui.navigation.wrapper.AppScreenNavigation
 import com.makeevrserg.simplekmm.ui.theme.Colors
 import com.makeevrserg.simplekmm.ui.theme.Typography
 import com.makeevrserg.simplekmm.ui.utils.collect
+import com.makeevrserg.simplekmm.ui.utils.viewModelFactory
 
 @Composable
 fun CharactersScreen(navigation: AppScreenNavigation) {
-    val viewModel: CharacterListViewModel = navigation.viewModelFactory(CharacterListViewModel::class.java) {
+    val viewModel: CharacterListViewModel = navigation.viewModelFactory() {
         CharacterListViewModel(RickAndMortyApiModule.value)
     }
     val lazyColumnState = rememberLazyListState()

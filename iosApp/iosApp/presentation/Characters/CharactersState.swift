@@ -6,7 +6,7 @@ import shared_logic
 import rick_morty
 
 class CharactersState: ObservableObject {
-    @Published var viewModel: CharacterListViewModel = CharacterListViewModel(api: RickAndMortyApiModule().value!)
+    @Published var viewModel: CharacterListViewModel = CharacterListViewModel(api: RickAndMortyApiModule.shared.value!)
     @Published var data: [shared_logic.Rick_mortyResult]?
     func onEndReached(){
         viewModel.loadNextPage()
@@ -15,7 +15,6 @@ class CharactersState: ObservableObject {
         self.viewModel.characterList.collect(collector: Collector<[shared_logic.Rick_mortyResult]> { yourValue in
             self.data = yourValue
         }) { (error) in
-            // code which is executed if the Flow object completed
         }
     }
 }
