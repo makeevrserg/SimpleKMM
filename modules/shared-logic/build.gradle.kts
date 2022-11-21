@@ -16,6 +16,10 @@ kotlin {
             kotlinOptions.jvmTarget = "11"
         }
     }
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -45,6 +49,11 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:${Dependencies.Domain.ktor}")
             }
         }
         val desktopMain by getting

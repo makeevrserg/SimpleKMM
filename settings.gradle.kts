@@ -22,7 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "SimpleKMM"
 include(":androidApp")
 include(":desktop")
-include(":KiosApp")
+include(":js")
+//include(":KiosApp")
 include(":modules:localdb-dto")
 include(":modules:rick-morty")
 include(":modules:localdb-api")
