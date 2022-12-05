@@ -6,4 +6,5 @@ target 'iosApp' do
   pod 'localdb_dto', :path => '../modules/localdb-dto'
   pod 'rick_morty', :path => '../modules/rick-morty'
   pod 'shared_logic', :path => '../modules/shared-logic'
+  pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.13.0/mokoMvvmFlowSwiftUI.podspec'
 end

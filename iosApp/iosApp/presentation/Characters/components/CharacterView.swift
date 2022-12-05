@@ -1,10 +1,10 @@
 import SwiftUI
 import Kingfisher
-import shared_logic
+import MultiPlatformLibrary
 
 struct CharacterView: View{
-    var character: shared_logic.Rick_mortyResult
-    init(character: shared_logic.Rick_mortyResult) {
+    var character: MultiPlatformLibrary.Rick_mortyResult
+    init(character: MultiPlatformLibrary.Rick_mortyResult) {
         self.character = character
     }
     var body: some View{

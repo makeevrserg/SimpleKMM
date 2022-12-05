@@ -9,7 +9,9 @@ object Dependencies {
     object Domain{
         const val ktor = "2.1.2"
     }
-
+    object Moko {
+        const val mvvm = "0.14.0"
+    }
     object DI {
 //        const val hiltViewModels = "1.0.0-alpha03"
 //        const val daggerHilt = "2.43.2"

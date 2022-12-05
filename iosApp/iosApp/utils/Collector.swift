@@ -1,5 +1,5 @@
 import Foundation
-import shared_logic
+import MultiPlatformLibrary
 
 
 

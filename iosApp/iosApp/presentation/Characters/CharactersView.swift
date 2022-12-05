@@ -2,24 +2,24 @@ import SwiftUI
 import Kingfisher
 import localdb_dto
 import localdb_api
-import shared_logic
 import rick_morty
-
+import MultiPlatformLibrary
+import mokoMvvmFlowSwiftUI
 struct CharactersView: View {
     
     @StateObject private var observableState = CharactersState()
-    
+    @ObservedObject var viewModel: CharacterListViewModel = CharacterListViewModel(api: RickAndMortyApiModule.shared.value!)
     var body: some View {
-        let list: [shared_logic.Rick_mortyResult]? = observableState.data
+        
+        let list: [MultiPlatformLibrary.Rick_mortyResult]? = viewModel.state(\.characterList)
         if (list == nil || list?.isEmpty == true){
             Text("Loading")
         } else {
             ListView(list: list!){
-                observableState.onEndReached()
+                viewModel.loadNextPage()
             }
         }
         
     }
     
 }
-

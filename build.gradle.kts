@@ -25,6 +25,6 @@ allprojects {
         maven("https://jitpack.io")
     }
 }
-tasks.register("clean", Delete::class) {
+tasks.register("cleanx", Delete::class) {
     delete(rootProject.buildDir)
 }

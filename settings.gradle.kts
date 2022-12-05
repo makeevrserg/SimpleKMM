@@ -23,7 +23,7 @@ rootProject.name = "SimpleKMM"
 include(":androidApp")
 include(":desktop")
 include(":js")
-//include(":KiosApp")
+include(":KiosApp")
 include(":modules:localdb-dto")
 include(":modules:rick-morty")
 include(":modules:localdb-api")

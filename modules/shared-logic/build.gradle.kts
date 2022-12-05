@@ -27,7 +27,10 @@ kotlin {
         ios.deploymentTarget = "14.1"
         podfile = project.file("../../iosApp/Podfile")
         framework {
-            baseName = "shared_logic"
+            baseName = "MultiPlatformLibrary"
+            isStatic = false
+            export("dev.icerock.moko:mvvm-core:${Dependencies.Moko.mvvm}")
+            export("dev.icerock.moko:mvvm-flow:${Dependencies.Moko.mvvm}")
         }
     }
     sourceSets {
@@ -44,6 +47,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:${Dependencies.Domain.ktor}")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:${Dependencies.Domain.ktor}")
                 implementation("com.arkivanov.decompose:decompose:${Dependencies.Kotlin.decompose}")
+                api("dev.icerock.moko:mvvm-core:${Dependencies.Moko.mvvm}")
+                api("dev.icerock.moko:mvvm-flow:${Dependencies.Moko.mvvm}")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt")
             }
         }
         val commonTest by getting {

@@ -7,6 +7,6 @@
 //
 
 import Foundation
-import shared_logic
+import MultiPlatformLibrary
 
-typealias FlowColletor = shared_logic.Kotlinx_coroutines_coreFlowCollector
+typealias FlowColletor = MultiPlatformLibrary.Kotlinx_coroutines_coreFlowCollector

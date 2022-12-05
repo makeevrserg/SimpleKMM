@@ -1,5 +1,6 @@
 package com.makeevrserg.simplekmm.ui.utils
 
+import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -14,7 +15,7 @@ class PagingCollector<T>(
     var page = initialPage - 1
     private var isLastPage: Boolean = false
     private var isLoading: Boolean = false
-    val list = MutableStateFlow<List<T>>(emptyList())
+    val list = MutableStateFlow<List<T>>(emptyList()).cMutableStateFlow()
     suspend fun reset() {
         list.value = emptyList()
         isLastPage = false

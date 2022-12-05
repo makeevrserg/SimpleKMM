@@ -1,11 +1,11 @@
 import SwiftUI
-import shared_logic
+import MultiPlatformLibrary
 
 struct ListView: View {
-    var list: [shared_logic.Rick_mortyResult]
+    var list: [MultiPlatformLibrary.Rick_mortyResult]
     var onLast: ()->Void
  
-    init(list: [shared_logic.Rick_mortyResult], onLast: @escaping () -> Void) {
+    init(list: [MultiPlatformLibrary.Rick_mortyResult], onLast: @escaping () -> Void) {
         self.list = list
         self.onLast = onLast
     }
