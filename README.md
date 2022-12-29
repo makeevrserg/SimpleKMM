@@ -3,6 +3,8 @@
     SimpleKMM is the Kotlin Multiplatform application of IOS,JS and JVM example with shared logic
 </p>
 
+# Repository moved [here](https://github.com/makeevrserg/KMM-Playground)
+
 ### **Platforms**
 - [x] IOS - shared logic; native UI
 - [x] JS - shared logic; compose for web as UI
